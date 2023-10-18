@@ -12,7 +12,8 @@ const Register = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    const termsAccept = e.target.terms.checked
+    console.log(email, password, termsAccept);
 
     // reset error
     setRegError("");
@@ -27,6 +28,10 @@ const Register = () => {
         "Your Password should have at least one uppercase characters"
       );
       return;
+    }
+    else if(!termsAccept){
+      setRegError('Please accept out terms and conditions')
+      return
     }
 
     // create user
@@ -58,7 +63,7 @@ const Register = () => {
             required
           />{" "}
           <br />
-          <div className="relative">
+          <div className="relative ">
             <input
               className="  my-4 w-full px-4 py-2 rounded-md outline-none  "
               placeholder="Type Your Password.."
@@ -67,13 +72,20 @@ const Register = () => {
               id=""
               required
             />
-            
+
             <span
               onClick={() => setShowPass(!showPass)}
               className="absolute inset-y-0 right-3 flex items-center "
             >
               {showPass ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
             </span>
+          </div>
+          <br />
+          <div>
+            <input type="checkbox" name="terms" id="" />
+            <label className="ml-3" htmlFor="terms">
+              Accept Our Terms and Conditions
+            </label>
           </div>
           <br />
           <input className="btn w-full my-4 " type="submit" value="submit" />
